@@ -1,0 +1,176 @@
+
+!
+! Last configuration change at 00:26:34 UTC Mon Mar 1 1993
+version 15.1
+service config
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname vg224
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$JICk$bYGaaPTOIIFLZLiI21Kj9/
+enable password supersecret
+!
+no aaa new-model
+crypto pki token default removal timeout 0
+!
+!
+ip source-route
+no ip routing
+!
+no ip cef
+!
+!
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+voice-card 0
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ip address 192.168.1.109 255.255.255.0
+no ip route-cache
+duplex full
+speed auto
+!
+interface FastEthernet0/1
+no ip address
+no ip route-cache
+shutdown
+duplex auto
+speed auto
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+!
+!
+control-plane
+!
+!
+voice-port 2/0
+!
+voice-port 2/1
+!
+voice-port 2/2
+!
+voice-port 2/3
+!
+voice-port 2/4
+!
+voice-port 2/5
+!
+voice-port 2/6
+!
+voice-port 2/7
+!
+voice-port 2/8
+!
+voice-port 2/9
+!
+voice-port 2/10
+!
+voice-port 2/11
+!
+voice-port 2/12
+!
+voice-port 2/13
+!
+voice-port 2/14
+!
+voice-port 2/15
+!
+voice-port 2/16
+!
+voice-port 2/17
+!
+voice-port 2/18
+!
+voice-port 2/19
+!
+voice-port 2/20
+!
+voice-port 2/21
+!
+voice-port 2/22
+!
+voice-port 2/23
+!
+!
+!
+mgcp profile default
+!
+!
+dial-peer voice 1 voip
+destination-pattern ....
+session protocol sipv2
+session target sip-server
+session transport udp
+dtmf-relay rtp-nte
+codec g711ulaw
+!
+dial-peer voice 6363 pots
+description Test analog phone.
+destination-pattern 6363
+authentication username 6363 password 12345
+no digit-strip
+port 2/0
+!
+!
+dial-peer voice 6464 pots
+description Panasonic Cordless.
+destination-pattern 6464
+authentication username 6464 password 12345
+no digit-strip
+port 2/1
+!
+!
+
+voice service voip                                   
+ip address trusted list                            
+ipv4 192.168.1.200
+
+
+gateway
+ timer receive-rtp 1200
+!
+sip-ua
+registrar ipv4:192.168.1.200 expires 300
+sip-server ipv4:192.168.1.200
+!
+!
+!
+line con 0
+line aux 0
+line vty 0 4
+password supersecret
+login
+transport input all
+!
+end
+
+
